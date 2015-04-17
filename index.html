@@ -6,6 +6,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
 
+	var watchID = null;
     // Wait for device API libraries to load
     //
     function onLoad() {
@@ -16,14 +17,45 @@
     //
     function onDeviceReady() {
         // Now safe to use device APIs
-		var element = document.getElementById("deviceStatus");
-		element.innerHTML = "Device: " + device.name + " is ready";
+		console.log("Device is ready");
+		startWatch ();
     }
 
+	function startWatch () {
+		var options = {frequency: 3000};
+		if (!navigator) {
+			console.log("No Navigator");
+		}
+		
+		if (!navigator.accelerometer) {
+			console.log("No Device motion");
+		}
+		
+		watchID =  navigator.accelerometer.watchAcceleration(onSuccess,onError,options);
+	}
+	
+	function stopWatch () {
+		if (watchID) {
+			navigator.accelerometer.clearWatch(watchID);
+			watchID = null;
+		}
+	}
+	
+	function onSuccess (acceleration) {
+		var element = document.getElementById('deviceStatus');
+		element.innerHTML = "ax: " + acceleration.x + "<br/>" + 
+			"ay: " + acceleration.y + "<br/>" +
+			"az: " + acceleration.z + "<br/>" + 
+			"time: " + acceleration.timestamp + "<br/>" ;
+	}
+	
+	function onError () {
+		alert("Error");
+	}
     </script>
   </head>
   <body onload="onLoad()">
-	  <h2>Hello v3</h2>
-	  <div id="deviceStatus"></div>
+	  <h2>Testing Accelerometer</h2>
+	  <div id="deviceStatus">Waiting for accelerometer ...</div>
   </body>
 </html>
