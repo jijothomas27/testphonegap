@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Ready Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Now safe to use device APIs
+		var element = document.getElementById("deviceStatus");
+		element.innerHTML = "Device: " + device.name + " is ready";
+    }
+
+    </script>
+  </head>
+  <body onload="onLoad()">
+	  <div id="deviceStatus"></div>
+  </body>
+</html>

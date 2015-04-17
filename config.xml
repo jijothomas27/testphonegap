@@ -1,0 +1,14 @@
+<widget id="com.kuthuki.pg" version="0.0.1">
+        <name>PG</name>
+        <description>
+            Learning phone gap
+        </description>
+        <author email="jijo.thomas@gmail.com" href="http://kuthuki.com">
+            Kuthuki
+        </author>
+        <content src="index.html" />
+        <access origin="*" />
+		<feature name="Device">
+		        <param name="android-package" value="org.apache.cordova.device.Device" />
+	    </feature>
+</widget>
